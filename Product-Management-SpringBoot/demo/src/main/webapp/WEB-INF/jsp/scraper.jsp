@@ -14,22 +14,13 @@
 
             <title>Words Scraping</title>
             <script>
-                $.ajax({
-                    url: "http://localhost:8080/scrapingForm",
-                    type: "GET",
-                    beforeSend: function(xhr) {
-                        // Retrieve the token from the session storage
-                        var token = sessionStorage.getItem("token");
-
-                        // Add the token to the Authorization header
-                        xhr.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function(response) {
-                        // Handle success response
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                    }
+                $(document).ready(function() {
+                    var token = sessionStorage.getItem("token");
+                    $.ajaxSetup({
+                      headers: {
+                        'Authorization': 'Bearer ' + data.token
+                      }
+                    });
                 });
             </script>
           </head>

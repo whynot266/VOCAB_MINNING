@@ -16,13 +16,9 @@
          <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
-            // When the document is ready
+
             $(document).ready(function() {
-
-              // Submit the login form
-              $('#login-form').submit(function(event) {
-
-                console.log("login success")
+                 $('#login-form').submit(function(event) {
                  // Prevent the form from submitting normally
                     event.preventDefault();
 
@@ -30,24 +26,32 @@
                     var email = $('#email').val();
                     var password = $('#password').val();
 
-                    // Send a POST request to the /api/authenticate endpoint
-                    $.ajax({
-                      url: '/api/authenticate',
-                      type: 'POST',
-                      data: {
-                        email: email,
-                        password: password
-                      },
-                      success: function(data) {
-                        // Log the JWT to the console
-                        console.log('JWT:', data.jwt);
 
-                        // Set the Authorization header for all future AJAX requests
+                    $.ajax({
+                      url: '/authenticate',
+                      type: 'POST',
+                      contentType: 'application/json',
+                      data: JSON.stringify({ email: email, password: password }),
+                      success: function(data) {
+
+                        console.log('JWT:', data.token);
+
+                        sessionStorage.setItem('token', data.token);
+
+
                         $.ajaxSetup({
                           headers: {
-                            'Authorization': 'Bearer ' + data.jwt
+                            'Authorization': 'Bearer ' + data.token
                           }
                         });
+
+
+                      }
+                    });
+
+
+
+
               });
 
 

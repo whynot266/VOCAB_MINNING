@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 @Component
 public class JwtProvider {
@@ -28,7 +29,7 @@ public class JwtProvider {
     }
     public boolean validateToken(String token){
        try{
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(token);
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
        }catch(SignatureException e){
             logger.error("Invalid JWT signature -> Message: {}", e);
@@ -52,4 +53,5 @@ public class JwtProvider {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
+
 }

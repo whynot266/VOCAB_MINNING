@@ -57,4 +57,8 @@ public class JwtResponse {
         this.name = name;
         this.roles = roles;
     }
+    public JwtResponse(String token) {
+        this.token = token;
+
+    }
 }

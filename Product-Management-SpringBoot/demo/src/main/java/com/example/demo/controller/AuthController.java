@@ -85,4 +85,14 @@ public class AuthController {
         UserPrinciple userPrinciple= (UserPrinciple) authentication.getPrincipal();
         return ResponseEntity.ok(new JwtResponse(token,userPrinciple.getName(), userPrinciple.getAuthorities()));
     }
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> loginProcess(@RequestBody SignInForm signInForm) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(signInForm.getEmail(), signInForm.getPassword())
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtProvider.createToken(authentication);
+        return ResponseEntity.ok(new JwtResponse(token));
+    }
+
 }
