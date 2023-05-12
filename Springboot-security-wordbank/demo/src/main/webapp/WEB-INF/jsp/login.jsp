@@ -19,20 +19,14 @@
 
     </head>
     <body>
-       <div class="header" >
-           <div class="sysbar">
-               <a href="">COOKING SPY</a>
-           </div>
-       </div>
 
-         <div class="materialContainer">
+
+         <div class="container">
 
             <form action="<c:url value="j_spring_security_check"/>" method="post" id="login-form">
-               <div class="box">
-
-                  <div class="title">ĐĂNG NHẬP</div>
-
-                  <div class="input">
+               <div class="keyboard" >
+                  <div class="input-box">
+                  <div class="input" >
                      <label for="name"></label>
                      <input type="text" name="username" id="email">
                      <span class="spin"></span>
@@ -44,18 +38,21 @@
                      <span class="spin"></span>
                   </div>
 
-                  <div >
-                     <button class="login-btn" type="submit"><span>GO</span> <i class="fa fa-check"></i></button>
+                  </div>
+                  <div>
+                     <button class="keyboard__key" type="submit" data-key="c">
+                     		<span class="keyboard__key-lines">
+                     			<span class="keyboard__key-line">GO!</span>
+                     		</span>
+                     	</button>
                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                   </div>
             </form>
-                  <a href="/project-final/registrationForm" class="pass-forgot"><span>Chưa có tài khoản?</span> Đăng ký</a>
+
 
                </div>
 
-               <div class="overbox">
 
-               </div>
 
          </div>
     </body>

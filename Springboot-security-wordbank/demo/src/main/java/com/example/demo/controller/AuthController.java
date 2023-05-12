@@ -58,6 +58,8 @@ public class AuthController {
         }
         Optional<UserEntity> user = userService.findByEmail(username);
 
+        model.addAttribute("bankCount", userService.bankCount(user.get()));
+        model.addAttribute("user", user.get());
 
 
         return "scraper";

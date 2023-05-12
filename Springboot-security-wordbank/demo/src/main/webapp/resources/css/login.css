@@ -4,18 +4,39 @@
 	margin: 0;
 	padding: 0;
 }
+.container{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    align-items:center;
+
+    justify-content:center;
+}
+
+.input{
+    display:flex;
+    flex-direction:column;
+    row-gap:5px;
+}
+.input input{
+    width:200px;
+    height:30px;
+    border-radius:5px;
+    padding-left:10px;
+
+}
 :root {
 	--hue: 0;
 	--sat: 0%;
 	--bg: hsl(var(--hue),var(--sat),90%);
 	--fg: hsl(var(--hue),var(--sat),10%);
 	--trans-dur: 0.3s;
-	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+	font-size: calc(12px + (24 - 16) * (100vw - 320px) / (2560 - 320));
 }
 body,
 button {
 	color: var(--fg);
-	font: 1em/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+	font: 1.1em/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 }
 body {
 	background-color: var(--bg);
@@ -118,7 +139,7 @@ body {
 		-0.05em -0.15em 0.05em hsla(0,0%,100%,0.8) inset;
 }
 .keyboard__key-line {
-	font-size: 2em;
+	font-size: 1.2em;
 	line-height: 1;
 }
 .keyboard__key-line--small {

@@ -1,2 +1,11 @@
-package com.example.demo.enums;public class VocabStatus {
+package com.example.demo.enums;
+
+
+
+public enum VocabStatus {
+        INBANK,
+        OUTBANK
+
+
+
 }
