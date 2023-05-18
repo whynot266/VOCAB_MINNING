@@ -30,8 +30,10 @@ public class UserVocabEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private VocabStatus vocabStatus;
 
-    public UserVocabEntity(long id, UserEntity user, String vocab, int learningTimes, int rememberTimes, VocabStatus vocabStatus) {
-        this.id = id;
+    public UserVocabEntity() {
+    }
+
+    public UserVocabEntity(UserEntity user, String vocab, int learningTimes, int rememberTimes, VocabStatus vocabStatus) {
         this.user = user;
         this.vocab = vocab;
         this.learningTimes = learningTimes;

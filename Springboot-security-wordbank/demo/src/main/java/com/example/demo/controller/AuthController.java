@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class AuthController {
 
 
     @RequestMapping("/scrapingForm")
-    public String homepage(Model model){
+    public String homepage(Model model, HttpSession session){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = principal.toString();
         if (principal instanceof UserDetails) {
@@ -60,10 +61,26 @@ public class AuthController {
 
         model.addAttribute("bankCount", userService.bankCount(user.get()));
         model.addAttribute("user", user.get());
-
+        session.setAttribute("bankCount",userService.bankCount(user.get()));
 
         return "scraper";
     }
+    @RequestMapping("/reviewForm")
+    public String review(Model model, HttpSession session){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = principal.toString();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        }
+        Optional<UserEntity> user = userService.findByEmail(username);
+        model.addAttribute("listToReview", userService.listToReview(user.get()));
+        model.addAttribute("bankCount", userService.bankCount(user.get()));
+        model.addAttribute("user", user.get());
+        session.setAttribute("bankCount",userService.bankCount(user.get()));
+        session.setAttribute("progress",userService.getProgress(user.get()));
+        return "review";
+    }
+
 
 
 }

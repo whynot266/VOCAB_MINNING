@@ -10,7 +10,7 @@
 
           <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <link rel="stylesheet" href="<c:url value="/resources/css/scraper.css"/>">
             <title>Words Scraping</title>
             <script type="text/javascript" src="<c:url value="/resources/js/scraper.js" />"></script>
@@ -24,44 +24,39 @@
                      // Show the popup element
                      popup.classList.add('visible');
                  }
-                 function banWord(button) {
-
+                 function forget(button) {
+                      console.log("asdasdasd")
 
                       var vocab = $(button).data('vocab');
+                      window.open("https://dict.laban.vn/find?type=1&query="+vocab, '_blank');
                       console.log(vocab);
-                      $(button).parent().parent().hide();
                       $.ajax({
-                        url:'/noNeed',
+                        url:'/forgetVocab',
                         method: 'POST',
                         data: { vocab: vocab },
-                        success: function(response) {
-                            console.log(response);
-                             var bankCount=$('#bank-count');
-                              var bankProgress=$('#bank-progress');
-                              bankCount.html(response.bankCount);
-                            bankProgress.html(response.bankProgress);
-
+                        success: function(data) {
+                            console.log(data);
+                            var bankProgress=$('#bank-progress');
+                            bankProgress.html(data);
+                             $(button).parent().parent().hide();
                         }
                       });
                   }
-                  function addWord(button) {
-
+                  function remember(button) {
+                        console.log("asdasdasd")
 
                         var vocab = $(button).data('vocab');
+
                         console.log(vocab);
-                        $(button).parent().parent().hide();
                         $.ajax({
-                          url:'/addToBank',
+                          url:'/rememberVocab',
                           method: 'POST',
                           data: { vocab: vocab },
-                          success: function(response) {
-                              console.log(response);
-
-                              var bankCount=$('#bank-count');
+                          success: function(data) {
+                              console.log(data);
                               var bankProgress=$('#bank-progress');
-                              bankCount.html(response.bankCount);
-                              bankProgress.html(response.bankProgress);
-
+                              bankProgress.html(data);
+                               $(button).parent().parent().hide();
                           }
                         });
                     }
@@ -116,11 +111,7 @@
                                     </div>
                                 </sec:authorize>
                           </sec:authorize>
-
-
-                                <a href="/reviewForm" class="keyboard__key">Review</a>
-
-
+                        <a href="/reviewForm" class="keyboard__key">Review</a>
                     </div>
 
 
@@ -129,13 +120,12 @@
 
 
                   <div style="padding:20px; display:flex; column-gap:10px; row-gap:10px; flex-wrap:wrap;">
-                    <c:forEach var="vocab" items="${vocabs}">
+                    <c:forEach var="userVocab" items="${listToReview}">
                       <div onmouseenter="showPopup(this)" onmouseleave="hidePopup(this)">
-                          <div class="vocab">${vocab}</div>
+                          <div class="vocab">${userVocab.vocab}</div>
                             <div class="popup">
-                                <button id="ban-button" onclick="banWord(this)" data-vocab="${vocab}" style="background:none;color:white;"><ion-icon name="ban"></ion-icon></button>
-                                <button id="add-button" onclick="addWord(this)" data-vocab="${vocab}" style="background:none;color:white;"><ion-icon name="arrow-down-circle"></ion-icon></button>
-                                <a class="action" href="https://dict.laban.vn/find?type=1&query=${vocab}" style="text-decoration:inherit;color:white;" target="_blank"><ion-icon name="search-circle"></ion-icon></a>
+                                <button id="fg-button" onclick="forget(this)" data-vocab="${userVocab.vocab}" style="background:none;color:white;"><ion-icon name="help-circle"></ion-icon></button>
+                                <button id="rm-button" onclick="remember(this)" data-vocab="${userVocab.vocab}" style="background:none;color:white;"><ion-icon name="checkmark-circle"></ion-icon></button>
                             </div>
                       </div>
                     </c:forEach>

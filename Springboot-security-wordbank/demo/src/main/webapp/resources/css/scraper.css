@@ -35,17 +35,20 @@ input{
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
 }
 .vocab{
-    max-height:34px;
+    max-height:40px;
     text-decoration:inherit;
     background: rgb(242,242,242);
     color: gray;
+    font-size:1.5rem;
     border: 1px solid var(--bg);
     outline:1ps solid gray;
     border-radius:5px;
-    padding:3px 6px 3px 6px;
+    padding:3px 20px 3px 20px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
 
 }
+
+
 .user-info{
     display:flex;
     align-items:center;
@@ -237,4 +240,29 @@ body {
 			0 -0.05em 0 hsla(0,0%,0%,0.4) inset,
 			-0.05em -0.15em 0.05em hsla(0,0%,100%,0.05) inset;
 	}
+}
+.popup{
+    display:flex;
+    justify-content:center;
+    column-gap:2px;
+    position: absolute; /* add this property */
+    align-items:center;
+    color:wheat;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+
+    opacity:0;
+
+    font-size: 2rem;
+    transform: translateY(-100%);
+    padding:3px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition:0.05s;
+}
+.popup.visible {
+    opacity:1;
+
+
 }
